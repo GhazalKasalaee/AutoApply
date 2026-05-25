@@ -1,0 +1,45 @@
+# AutoApply AI — Production Requirements
+# Tested on Python 3.11
+
+# Core
+langgraph>=0.2.0
+langchain-core>=0.3.0
+pydantic>=2.0.0
+sqlalchemy>=2.0.0
+python-dotenv>=1.0.0
+
+# LLM
+google-generativeai>=0.8.0
+
+# RAG / Vector DB
+chromadb>=0.5.0
+sentence-transformers>=2.7.0
+
+# Web scraping
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+playwright>=1.40.0
+lxml>=5.0.0
+
+# Frontend
+streamlit>=1.31.0
+plotly>=5.18.0
+pandas>=2.0.0
+
+# CLI (new in final)
+typer>=0.12.0
+rich>=13.7.0
+
+# Optional: Google Calendar integration
+# Uncomment to enable Google Calendar OAuth sync
+google-api-python-client>=2.0.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.2.0
+
+# Pinned packages to ensure CI reproducible installs (added to fix CI import smoke)
+# These versions were validated locally during troubleshooting
+google-generativeai==0.8.6
+chromadb==1.5.9
+beautifulsoup4==4.14.3
+lxml==6.1.1
+plotly==6.7.0

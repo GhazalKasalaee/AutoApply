@@ -1,0 +1,66 @@
+---
+title: AutoApply AI
+emoji: 🤖
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+sdk_version: "1.31.0"
+app_file: app.py
+pinned: true
+license: mit
+---
+
+# AutoApply AI — Multi-Agent Job Application Copilot
+
+A 6-agent LangGraph pipeline that automatically evaluates job fits, tailors your CV, generates cover letters, and schedules follow-ups. Paste a job URL → get everything you need to apply.
+
+## Features
+
+- **Job Fit Scoring** — AI evaluates job-resume compatibility
+- **CV Tailoring** — Auto-adapts your CV to job requirements
+- **Cover Letter Generation** — Context-aware letters in seconds
+- **Outreach Messages** — Personalized LinkedIn/email templates
+- **Calendar Integration** — Automatic follow-up reminders (.ics export)
+- **Cost Tracking** — Real-time LLM cost monitoring
+- **Bloomberg Terminal UI** — Dark theme with live agent streaming
+
+## Quick Start
+
+```bash
+# Clone & setup
+git clone https://github.com/GhazalKasalaee/AutoApply.git
+cd AutoApply
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Configure
+cp credentials.json.template credentials.json
+# Add your API keys to credentials.json
+
+# Run
+streamlit run app.py
+```
+
+Visit `http://localhost:8501`
+
+## Tech Stack
+
+- **LLM**: Anthropic Claude API
+- **Agent Framework**: LangGraph
+- **Frontend**: Streamlit
+- **Database**: SQLAlchemy + SQLite
+- **Vector DB**: ChromaDB
+- **Deployment**: Docker-ready
+
+## Architecture
+
+```
+Pipeline Flow:
+Job URL → Scraper → Scorer → CV Selector → CV Tailor → 
+Cover Letter → Outreach Generator → Calendar Export
+```
+
+## License
+
+MIT

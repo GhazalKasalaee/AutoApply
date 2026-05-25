@@ -1,0 +1,33 @@
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+
+# Local files
+.env
+.env.local
+*.db
+chroma_db/
+data/cvs/*.txt
+data/persona.txt
+data/my_cv.txt
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Git
+.git/
+.gitignore
+
+# Docs
+docs/demo.gif
+docs/screenshots/
+README.md

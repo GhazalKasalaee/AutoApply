@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Environment / Secrets
+.env
+.env.local
+.env.*.local
+credentials.json
+
+# Generated calendar exports
+data/calendar/*.ics
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+autoapply.db
+
+# ChromaDB
+chroma_db/
+chroma.sqlite3
+
+# Personal data (don't commit your actual CV or persona)
+data/cvs/*.txt
+data/persona.txt
+data/my_cv.txt
+data/cv_example.txt
+data/persona_example.txt
+# Keep the templates / examples
+!data/cvs/*.example.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# OS
+Thumbs.db
+ehthumbs.db
+
+# Docs (build artifacts)
+docs/_build/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Playwright
+playwright/.cache/
+
+# Logs
+*.log
+logs/
+
+# Backups
+*.bak
+
+# Test artifacts
+.coverage
+htmlcov/

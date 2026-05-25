@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Lint with ruff
+      run: |
+        pip install ruff
+        ruff check src/ --select E9,F63,F7,F82 --show-files
+
+    - name: Import smoke test
+      run: |
+        python -c "from src.schemas import JobScore, CVSelection, CoverLetter, OutreachBundle"
+        python -c "from src.agents.scorer import score_job"
+        python -c "from src.agents.cv_selector import select_cv, load_cvs_into_chromadb"
+        python -c "from src.agents.cover_letter import write_cover_letter"
+        python -c "from src.agents.outreach import write_outreach"
+        python -c "from src.agents.graph import process_job, build_graph"
+        python -c "from src import analytics"
+        echo "✅ All modules import correctly"
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t autoapply-ai:test .
+      - name: Smoke test container
+        run: |
+          docker run -d --name test-container -p 7860:7860 \
+            -e GEMINI_API_KEY=dummy \
+            autoapply-ai:test
+          sleep 15
+          curl -f http://localhost:7860 || (docker logs test-container && exit 1)
+          docker stop test-container
+          docker rm test-container
